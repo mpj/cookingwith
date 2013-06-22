@@ -1,0 +1,24 @@
+<head>
+  <title>cookingwith</title>
+</head>
+
+<body>
+  {{> hello}}
+</body>
+
+<template name="hello">
+  <h1>{{greeting}}</h1>
+  {{#each poll_options}}
+    {{> poll_option }}
+  {{/each}}
+</template>
+
+<template name="poll_option">
+  <div class="poll_option">
+    <div class="votes_container">
+      <p class="votes_count">{{votes_count}}</p>
+      <input type="button" class="vote" value="vote" />
+    </div>
+    {{title}}
+  </div>
+</template>
