@@ -23,7 +23,7 @@
 </body>
 
 <template name="hello">
-  <h1>Time until refill: {{time_until_refill}}</h1>
+  {{> refill_time}}
   <p>Your votes: {{my_votes}}
     <input
       class="buy_votes"
@@ -31,6 +31,12 @@
   {{#each poll_options}}
     {{> poll_option }}
   {{/each}}
+</template>
+
+<template name="refill_time">
+  {{#if is_visible}}
+    <h1>Time until refill: {{time_until_refill}}</h1>
+  {{/if}}
 </template>
 
 <template name="poll_option">

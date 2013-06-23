@@ -1,10 +1,15 @@
 model = CookingWith.model
 
+zeroPad = (str) -> if str.length is 1 then str else '0' + str
+
 if Meteor.isClient
 
   Template.hello.my_votes = model.my_votes
 
-  Template.hello.time_until_refill = ->
+  Template.refill_time.is_visible = ->
+    !!model.timeToRefill()
+
+  Template.refill_time.time_until_refill = ->
     diff = model.timeToRefill()
     secondsLeft = diff / 1000
     hours = Math.floor secondsLeft / 3600
@@ -12,7 +17,7 @@ if Meteor.isClient
     minutes = Math.floor secondsLeft / 60
     secondsLeft = secondsLeft - minutes * 60
     seconds = Math.floor secondsLeft
-    hours + ':' + minutes + ':' + seconds
+    zeroPad(hours) + ':' + zeroPad(minutes) + ':' + zeroPad(seconds)
 
 
   Template.hello.poll_options = model.list_options
