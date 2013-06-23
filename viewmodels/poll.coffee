@@ -4,9 +4,16 @@ if Meteor.isClient
 
   Template.hello.my_votes = model.my_votes
 
+  Template.hello.time_until_refill = ->
+    diff = model.timeToRefill()
+    secondsLeft = diff / 1000
+    hours = Math.floor secondsLeft / 3600
+    secondsLeft = secondsLeft - hours * 3600
+    minutes = Math.floor secondsLeft / 60
+    secondsLeft = secondsLeft - minutes * 60
+    seconds = Math.floor secondsLeft
+    hours + ':' + minutes + ':' + seconds
 
-  Template.hello.greeting = ->
-    "Welcome to cookingwith."
 
   Template.hello.poll_options = model.list_options
 

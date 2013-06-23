@@ -1,5 +1,7 @@
 poll_options = new Meteor.Collection 'poll_options'
 
+REFILL_TIME_MS = 24 * 3600 * 1000
+
 CookingWith.model =
 
   my_votes: ->
@@ -12,9 +14,27 @@ CookingWith.model =
     Meteor.users.update Meteor.userId(), $inc: 'profile.votes_count': 25
 
   vote: ->
-    if Meteor.user().profile.votes_count
-      poll_options.update this._id, { $inc: { votes_count: 1 } }
-      Meteor.users.update Meteor.userId(), $inc: 'profile.votes_count': -1
+    if Meteor.user().profile.votes_count > 0
+      poll_options.update this._id,
+        $inc: votes_count: 1
+      Meteor.users.update Meteor.userId(),
+        $inc: 'profile.votes_count': -1
+      if Meteor.user().profile.votes_count is 0
+        console.log("zero!")
+        Meteor.users.update Meteor.userId(),
+          $set: 'profile.votes_emptied_at':
+            CookingWith.ServerTime.instance.epoch()
+      else
+        console.log "not zero", Meteor.user().profile.votes_count
+
+  timeToRefill: ->
+    Meteor.user().profile.votes_emptied_at +
+    REFILL_TIME_MS -
+    CookingWith.ServerTime.instance.reactiveEpoch()
+
+
+
+
 
   options: ->
     [
