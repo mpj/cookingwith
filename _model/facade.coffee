@@ -13,9 +13,9 @@ CookingWith.model =
   request_vote_buy: ->
     Meteor.users.update Meteor.userId(), $inc: 'profile.votes_count': 25
 
-  vote: ->
+  vote: (poll_option) ->
     if Meteor.user().profile.votes_count > 0
-      poll_options.update this._id,
+      poll_options.update poll_option._id,
         $inc: votes_count: 1
       Meteor.users.update Meteor.userId(),
         $inc: 'profile.votes_count': -1
@@ -23,8 +23,6 @@ CookingWith.model =
         Meteor.users.update Meteor.userId(),
           $set: 'profile.votes_emptied_at':
             CookingWith.ServerTime.instance.epoch()
-      else
-        console.log "not zero", Meteor.user().profile.votes_count
 
   timeToRefill: ->
     time = Meteor.user().profile.votes_emptied_at +
@@ -32,9 +30,10 @@ CookingWith.model =
     CookingWith.ServerTime.instance.reactiveEpoch()
     Math.max time, 0
 
-
-
-
+  addOption: (title) ->
+    poll_options.insert
+      title: title
+      votes_count: 0
 
 
   options: ->
