@@ -8,6 +8,10 @@
 
 <template name="hello">
   <h1>{{greeting}}</h1>
+  <p>Your votes: {{my_votes}}
+    <input
+      class="buy_votes"
+      type="button" value="Buy 25 votes" /></p>
   {{#each poll_options}}
     {{> poll_option }}
   {{/each}}
@@ -17,7 +21,10 @@
   <div class="poll_option">
     <div class="votes_container">
       <p class="votes_count">{{votes_count}}</p>
-      <input type="button" class="vote" value="vote" />
+      <input type="button"
+             class="vote"
+             value="vote"
+             {{vote_button_disabled}} />
     </div>
     {{title}}
   </div>

@@ -1,19 +1,23 @@
-poll_options = new Meteor.Collection 'poll_options'
-
+model = CookingWith.model
 
 if Meteor.isClient
+
+  Template.hello.my_votes = model.my_votes
+
+
   Template.hello.greeting = ->
     "Welcome to cookingwith."
 
-  Template.hello.poll_options = ->
-    poll_options.find()
-
-  Template.hello.events
-    'click .clear': -> CookingWith.bootstrap()
+  Template.hello.poll_options = model.list_options
 
   Template.poll_option.events
-    'click .vote': ->
-      poll_options.update this._id, { $inc: { votes_count: 1 } }
+    'click .vote': model.vote
+
+  Template.poll_option.vote_button_disabled = ->
+    'disabled' if not model.my_votes()
+
+  Template.hello.events
+    'click .buy_votes': model.request_vote_buy
 
 if Meteor.isServer
   Meteor.startup ->
