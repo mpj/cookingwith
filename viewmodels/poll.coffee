@@ -60,6 +60,14 @@ if Meteor.isClient
         e.target.value = ''
         Session.set 'poll_option_new_state', null
 
+  Template.poll_settings.isVisible = -> true
+
+  Template.poll_settings.rendered = ->
+    $(this.find('.form_datetime')).datetimepicker
+     showMeridian: 0,
+     autoclose: true
+
+
 if Meteor.isServer
   Meteor.startup ->
     # // code to run on server at startup
@@ -75,4 +83,5 @@ CookingWith.bootstrap = ->
   poll_options.insert
     title: 'Stellan Skarsgård shows how to do a hole in one'
     votes_count: 9
+
 
