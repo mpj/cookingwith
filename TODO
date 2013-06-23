@@ -8,8 +8,7 @@ As an admin of a show, I want to
 
 As a user, I want to
   * add options on an open poll.
-  * be disallowed to vote on open polls.
-  * be disallowed to vote when I have no votes
+  * be disallowed to vote on closed polls.
   * gain new votes after a period of time
   * buy new votes immideately
   * see a countdown to when I receive new votes

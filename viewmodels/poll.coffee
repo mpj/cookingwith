@@ -13,8 +13,11 @@ if Meteor.isClient
   Template.poll_option.events
     'click .vote': model.vote
 
-  Template.poll_option.vote_button_disabled = ->
-    'disabled' if not model.my_votes()
+  Template.poll_option.vote_button_class = ->
+    if not model.my_votes()
+      'disabled'
+    else
+      'btn-primary'
 
   Template.hello.events
     'click .buy_votes': model.request_vote_buy
