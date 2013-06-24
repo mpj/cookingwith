@@ -29,10 +29,8 @@ if Meteor.isClient
 
 
   Template.poll_option.vote_button_class = ->
-    if not model.my_votes()
-      'disabled'
-    else
-      'btn-primary'
+    if not model.my_votes() then 'disabled'
+    else 'btn-primary'
 
   Template.hello.events
     'click .buy_votes': (e) ->
@@ -61,18 +59,6 @@ if Meteor.isClient
         Session.set 'poll_option_new_state', null
 
   Template.poll_settings.isVisible = -> true
-
-  Template.poll_settings.events
-    'onchange input': ->
-      console.log "change"
-    'change input': ->
-      console.log "change"
-    'changed input': ->
-      console.log "change"
-    'keydown input': ->
-      console.log "change"
-    'keyup input': ->
-      console.log "change"
 
   Template.poll_settings.rendered = ->
     $(this.find('.form_datetime')).datetimepicker({

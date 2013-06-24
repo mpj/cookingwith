@@ -9,10 +9,12 @@ CookingWith.data = {
 CookingWith.model =
 
   poll_current: ->
-    id = Session.get 'current_poll_id'
+    # TODO: Not keen on keeping this here...
+    navState =  Session.get 'navigation_state'
+    id = CookingWith.router.current_poll_id()
     if not id?
-      id = polls.insert title: 'Untitled poll'
-      Session.set 'current_poll_id', id
+      CookingWith.router.current_poll_id polls.insert
+        title: 'Untitled poll'
     polls.findOne id
 
   my_votes: ->
@@ -20,9 +22,10 @@ CookingWith.model =
     Meteor.user().profile.votes_count
 
   list_options: ->
-    poll_options.find {
-      'poll_id': CookingWith.model.poll_current()._id
-    }, sort: votes_count: -1
+    if CookingWith.model.poll_current()
+      poll_options.find {
+        'poll_id': CookingWith.model.poll_current()._id
+      }, sort: votes_count: -1
 
   request_vote_buy: ->
     Meteor.users.update Meteor.userId(), $inc: 'profile.votes_count': 25
@@ -39,6 +42,7 @@ CookingWith.model =
             CookingWith.ServerTime.instance.epoch()
 
   timeToRefill: ->
+    return 0 if not Meteor.user()?
     time = Meteor.user().profile.votes_emptied_at +
     REFILL_TIME_MS -
     CookingWith.ServerTime.instance.reactiveEpoch()
@@ -58,19 +62,3 @@ CookingWith.model =
     console.log "updating", id
     polls.update id,
       $set: 'end_epoch': epoch
-
-
-
-  options: ->
-    [
-      {
-        title: 'Kim Jon Il cooks pasta'
-        votes_count: 12
-      },{
-          title: 'Obama shows shows to shop for a hat'
-        votes_count: 11
-      },{
-        title: 'Stellan Skarsgård shows how to do a hole in one'
-        votes_count: 9
-      }
-    ]
