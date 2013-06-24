@@ -1,14 +1,28 @@
 poll_options = new Meteor.Collection 'poll_options'
+polls = new Meteor.Collection 'polls'
 
-
+CookingWith.data = {
+  poll_options: poll_options
+  polls: polls
+}
 
 CookingWith.model =
+
+  poll_current: ->
+    id = Session.get 'current_poll_id'
+    if not id?
+      id = polls.insert title: 'Untitled poll'
+      Session.set 'current_poll_id', id
+    polls.findOne id
 
   my_votes: ->
     return 0 if not Meteor.user()
     Meteor.user().profile.votes_count
 
-  list_options: -> poll_options.find {}, sort: votes_count: -1
+  list_options: ->
+    poll_options.find {
+      'poll_id': CookingWith.model.poll_current()._id
+    }, sort: votes_count: -1
 
   request_vote_buy: ->
     Meteor.users.update Meteor.userId(), $inc: 'profile.votes_count': 25
@@ -34,6 +48,17 @@ CookingWith.model =
     poll_options.insert
       title: title
       votes_count: 0
+      poll_id: CookingWith.model.poll_current()._id
+
+  setEndEpoch: (epoch) ->
+    console.log("setEndEpoch", epoch)
+    # TODO check if admin
+    # TODO use url navigation instead of session
+    id = CookingWith.model.poll_current()._id
+    console.log "updating", id
+    polls.update id,
+      $set: 'end_epoch': epoch
+
 
 
   options: ->

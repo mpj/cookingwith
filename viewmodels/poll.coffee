@@ -62,26 +62,22 @@ if Meteor.isClient
 
   Template.poll_settings.isVisible = -> true
 
+  Template.poll_settings.events
+    'onchange input': ->
+      console.log "change"
+    'change input': ->
+      console.log "change"
+    'changed input': ->
+      console.log "change"
+    'keydown input': ->
+      console.log "change"
+    'keyup input': ->
+      console.log "change"
+
   Template.poll_settings.rendered = ->
-    $(this.find('.form_datetime')).datetimepicker
-     showMeridian: 0,
-     autoclose: true
-
-
-if Meteor.isServer
-  Meteor.startup ->
-    # // code to run on server at startup
-
-CookingWith.bootstrap = ->
-  poll_options.remove {}
-  poll_options.insert
-    title: 'Kim Jon Il cooks pasta'
-    votes_count: 12
-  poll_options.insert
-    title: 'Obama shows shows to shop for a hat'
-    votes_count: 11
-  poll_options.insert
-    title: 'Stellan Skarsgård shows how to do a hole in one'
-    votes_count: 9
-
+    $(this.find('.form_datetime')).datetimepicker({
+      showMeridian: 0,
+      autoclose: true
+    }).on 'changeDate', (e) ->
+      model.setEndEpoch e.date.valueOf()
 
