@@ -1,5 +1,8 @@
 A mobile app that allows a user to vote on a time-limited poll. After voting, one has to wait for a period of time before allowed to vote again. To circumvent this, the user can pay for votes using in-app purchases.
 
+
+* Absolutely Critical for MVP
+
 As an admin of a show, I want to
   * create a poll with a specified start and end date.
   * remove poll options
@@ -7,13 +10,18 @@ As an admin of a show, I want to
 
 As a user, I want to
   * be disallowed to vote on closed polls.
-  * see a countdown to when the poll ends
   * request to be notified when new there is a new poll
   * request to be be notified when I get new votes
   * request to be notified when a show is released for a poll I've voted on
   * Turn off notifications for the above
   * list episodes in order of release date
   * watch episodes in the youtube app by tapping on them
+
+Empty?
+  Write down critical improvements that are needed for the MVP broken into 1-hour fixes.
+
+
+* After MVP is up
 
 
 

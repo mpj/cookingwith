@@ -21,6 +21,7 @@
     <input
       class="buy_votes"
       type="button" value="Buy 25 votes" /></p>
+  {{> deadline}}
   {{#each poll_options}}
     {{> poll_option }}
   {{/each}}
@@ -55,6 +56,10 @@
        {{title}}
     </div>
   </div>
+</template>
+
+<template name="deadline">
+  Poll ends in: {{clock}}
 </template>
 
 <template name="poll_settings">

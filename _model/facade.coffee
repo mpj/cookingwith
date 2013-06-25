@@ -48,6 +48,11 @@ CookingWith.model =
     CookingWith.ServerTime.instance.reactiveEpoch()
     Math.max time, 0
 
+  timeToEnd: ->
+    poll = CookingWith.model.poll_current()
+    return 0 if not poll or not poll.end_epoch?
+    poll.end_epoch - CookingWith.ServerTime.instance.reactiveEpoch()
+
   addOption: (title) ->
     poll_options.insert
       title: title
