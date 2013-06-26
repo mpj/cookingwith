@@ -42,7 +42,7 @@ if Meteor.isClient
 
 
   Template.poll_option.vote_button_class = ->
-    if not model.my_votes() then 'disabled'
+    if not model.can_vote() then 'disabled'
     else 'btn-primary'
 
   Template.hello.events
@@ -73,10 +73,22 @@ if Meteor.isClient
 
   Template.poll_settings.isVisible = -> true
 
+
   Template.poll_settings.rendered = ->
     $(this.find('.form_datetime')).datetimepicker({
       showMeridian: 0,
-      autoclose: true
+      autoclose: true,
+      startDate: new Date(Date.now()),
+      initialDate: new Date(model.deadline()),
+      minuteStep: 1
     }).on 'changeDate', (e) ->
-      model.setEndEpoch e.date.valueOf()
+
+      UTCToLocalDate = (d) ->
+        # bootstrap-timepicker will return the date in UTC. I.e. if you pick
+        # 09:00 that will be really be 9AM UTC, not your local time. This is
+        # not how we want to interpret things (because it seems messed up) so
+        # let's intepret it as local time instead.
+        new Date(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(), 0)
+
+      model.setEndEpoch Number(UTCToLocalDate(e.date))
 

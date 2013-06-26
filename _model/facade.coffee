@@ -8,6 +8,9 @@ CookingWith.data = {
 
 CookingWith.model =
 
+  deadline: ->
+    CookingWith.model.poll_current().end_epoch
+
   poll_current: ->
     # TODO: Not keen on keeping this here...
     navState =  Session.get 'navigation_state'
@@ -20,6 +23,11 @@ CookingWith.model =
   my_votes: ->
     return 0 if not Meteor.user()
     Meteor.user().profile.votes_count
+
+  can_vote: ->
+    CookingWith.model.my_votes() > 0 &&
+    CookingWith.model.poll_current().end_epoch >
+      CookingWith.ServerTime.instance.reactiveEpoch()
 
   list_options: ->
     if CookingWith.model.poll_current()
