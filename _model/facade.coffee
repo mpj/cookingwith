@@ -11,6 +11,9 @@ CookingWith.model =
   deadline: ->
     CookingWith.model.poll_current().end_epoch
 
+  polls: ->
+    polls.find({})
+
   poll_current: ->
     # TODO: Not keen on keeping this here...
     navState =  Session.get 'navigation_state'

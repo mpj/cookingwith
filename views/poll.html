@@ -15,19 +15,29 @@
   </div>
 </body>
 
-<template name="hello">
-  {{> refill_time}}
-  <p>Your votes: {{my_votes}}
-    <input
-      class="buy_votes"
-      type="button" value="Buy 25 votes" /></p>
-  {{> deadline}}
-  {{#each poll_options}}
-    {{> poll_option }}
+<template name="polls">
+  {{#each polls}}
+    <div><a href="{{href}}">{{title}}</a></div>
   {{/each}}
+</template>
 
-  {{> poll_option_new}}
-  {{> poll_settings}}
+<template name="hello">
+  {{#if isStatePollsList}}
+    {{> polls}}
+  {{else}}
+    {{> refill_time}}
+    <p>Your votes: {{my_votes}}
+      <input
+        class="buy_votes"
+        type="button" value="Buy 25 votes" /></p>
+    {{> deadline}}
+    {{#each poll_options}}
+      {{> poll_option }}
+    {{/each}}
+
+    {{> poll_option_new}}
+    {{> poll_settings}}
+  {{/if}}
 </template>
 
 <template name="poll_option_new">

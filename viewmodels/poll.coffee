@@ -5,6 +5,15 @@ model = CookingWith.model
 if Meteor.isClient
 
   Template.hello.my_votes = model.my_votes
+  Template.hello.isStatePollsList = ->
+    console.log 'state', CookingWith.router.state().name
+    CookingWith.router.state().name is 'polls'
+
+  Template.polls.polls = ->
+    model.polls().map (p) ->
+      title: p.title
+      href: '/p/' + p._id
+
 
   Template.refill_time.is_visible = ->
     !!model.timeToRefill()

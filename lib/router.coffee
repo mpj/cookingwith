@@ -9,12 +9,16 @@ if Meteor.isClient
   CookingWithRouter = Backbone.Router.extend
 
     routes:
-      '':               'root',
+      '':               'root'
+      'polls':          'polls'
       'p/:id':          'poll'
 
     root: -> state null
 
     poll: (id) -> state name: 'poll', id: id
+    polls: () -> state name: 'polls'
+
+    state: state
 
     current_poll_id: (id) ->
       this.navigate 'p/' + id, trigger: true if id?
