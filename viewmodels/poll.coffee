@@ -23,11 +23,11 @@ if Meteor.isClient
     if Template.poll_title.state_edit()
       $(".poll_title input[type='text']").focus()
 
-  Template.hello.my_votes = model.my_votes
-  Template.hello.isStatePollsList = ->
+  Template.container.my_votes = model.my_votes
+  Template.container.isStatePollsList = ->
     CookingWith.router.state().name is 'polls'
 
-  Template.polls.polls = ->
+  Template.poll_list.polls = ->
     model.polls().map (p) ->
       title: p.title
       href: '/p/' + p._id
@@ -63,7 +63,7 @@ if Meteor.isClient
   Template.deadline.passed = ->
     model.timeToEnd() < 0
 
-  Template.hello.poll_options = model.list_options
+  Template.container.poll_options = model.list_options
 
   Template.poll_option.events
     'click .vote': (e) ->
@@ -74,7 +74,7 @@ if Meteor.isClient
     if not model.can_vote() then 'disabled'
     else 'btn-primary'
 
-  Template.hello.events
+  Template.container.events
     'click .buy_votes': (e) ->
       model.request_vote_buy()
       e.preventDefault()

@@ -1,0 +1,11 @@
+<template name="poll_title">
+
+<div class="poll_title">
+  {{#if state_edit}}
+    <input value="{{title}}" type="text" />
+  {{else}}
+    <h1 class="title">{{title}}</h1>
+  {{/if}}
+</div>
+
+</template>

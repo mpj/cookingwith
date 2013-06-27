@@ -5,6 +5,7 @@ A mobile app that allows a user to vote on a time-limited poll. After voting, on
 
 As an admin of a show, I want to
   * change start date
+  * be prevented from entering an empty title
   * create a poll with a specified start and end date.
   * remove poll options
   * be disallowed to create polls overlapping eachother in time

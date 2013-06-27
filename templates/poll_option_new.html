@@ -1,0 +1,11 @@
+<template name="poll_option_new">
+
+{{#if isStateReady}}
+  <a href="#" class="new btn btn-large btn-block btn-primary">
+    Add your own (10 votes)</a>
+{{/if}}
+{{#if isStateAdding}}
+  <input type="text" class="title" />
+{{/if}}
+
+</template>
