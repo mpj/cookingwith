@@ -33,13 +33,15 @@ if Meteor.isClient
   Template.deadline.clock = ->
     countdown_timer model.timeToEnd()
 
+  Template.deadline.passed = ->
+    model.timeToEnd() < 0
+
   Template.hello.poll_options = model.list_options
 
   Template.poll_option.events
     'click .vote': (e) ->
       e.preventDefault()
       model.vote(this)
-
 
   Template.poll_option.vote_button_class = ->
     if not model.can_vote() then 'disabled'
@@ -76,10 +78,10 @@ if Meteor.isClient
 
   Template.poll_settings.rendered = ->
     $(this.find('.form_datetime')).datetimepicker({
-      showMeridian: 0,
-      autoclose: true,
-      startDate: new Date(Date.now()),
-      initialDate: new Date(model.deadline()),
+      showMeridian: 0
+      autoclose: true
+      startDate: new Date(Date.now())
+      initialDate: if model.deadline() then new Date(model.deadline())
       minuteStep: 1
     }).on 'changeDate', (e) ->
 

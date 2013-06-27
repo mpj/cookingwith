@@ -72,6 +72,5 @@ CookingWith.model =
     # TODO check if admin
     # TODO use url navigation instead of session
     id = CookingWith.model.poll_current()._id
-    console.log "updating", id
     polls.update id,
       $set: 'end_epoch': epoch

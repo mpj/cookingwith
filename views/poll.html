@@ -59,7 +59,11 @@
 </template>
 
 <template name="deadline">
-  Poll ends in: {{clock}}
+  {{#if passed}}
+    This poll has closed!
+  {{else}}
+    Poll ends in: {{clock}}
+  {{/if}}
 </template>
 
 <template name="poll_settings">
