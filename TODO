@@ -4,13 +4,13 @@ A mobile app that allows a user to vote on a time-limited poll. After voting, on
 * Absolutely Critical for MVP
 
 As an admin of a show, I want to
-  * change TITLE!
   * change start date
   * create a poll with a specified start and end date.
   * remove poll options
   * be disallowed to create polls overlapping eachother in time
 
 As a user, I want to
+  * NOT be able to edit the poll title
   * see when a poll starts
   * automatically go to the current open poll with a uri
   * see list in order of ... end date?
