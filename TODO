@@ -13,7 +13,7 @@ As an admin of a show, I want to
   * be disallowed to create polls overlapping eachother in time
 
 As a user, I want to
-  * see when a poll starts
+  * be prevented from voting on a poll that hasnt started
   * automatically go to the current open poll with a uri
   * see list in order of ... end date?
 

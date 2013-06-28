@@ -11,8 +11,7 @@ CookingWith.model =
   deadline: -> CookingWith.model.poll_current().end_epoch
   beginning: -> CookingWith.model.poll_current().start_epoch
 
-  polls: ->
-    polls.find({})
+  polls: -> polls.find {}
 
   poll_current: ->
     # TODO: Not keen on keeping this here...
@@ -63,6 +62,11 @@ CookingWith.model =
     poll = CookingWith.model.poll_current()
     return 0 if not poll or not poll.end_epoch?
     poll.end_epoch - CookingWith.ServerTime.instance.reactiveEpoch()
+
+  timeToStart: ->
+    poll = CookingWith.model.poll_current()
+    return 0 if not poll or not poll.start_epoch?
+    poll.start_epoch - CookingWith.ServerTime.instance.reactiveEpoch()
 
   addOption: (title) ->
     poll_options.insert

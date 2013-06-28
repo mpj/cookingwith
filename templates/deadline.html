@@ -1,8 +1,14 @@
 <template name="deadline">
 
+{{#if waiting}}
+  Poll will start in: {{clock}}
+{{/if}}
+
 {{#if passed}}
   This poll has closed!
-{{else}}
+{{/if}}
+
+{{#if running}}
   Poll ends in: {{clock}}
 {{/if}}
 

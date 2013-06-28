@@ -58,10 +58,14 @@ if Meteor.isClient
     countdown_timer model.timeToRefill()
 
   Template.deadline.clock = ->
-    countdown_timer model.timeToEnd()
+    if model.timeToStart() > 0
+      countdown_timer model.timeToStart()
+    else
+      countdown_timer model.timeToEnd()
 
-  Template.deadline.passed = ->
-    model.timeToEnd() < 0
+  Template.deadline.waiting = -> model.timeToStart() > 0
+  Template.deadline.passed = ->  model.timeToEnd() <= 0
+  Template.deadline.running = -> not Template.deadline.waiting() and not Template.deadline.passed()
 
   Template.container.poll_options = model.list_options
 
@@ -121,7 +125,7 @@ if Meteor.isClient
       autoclose: true
       startDate: new Date(Date.now())
       initialDate: if model.deadline() then new Date(model.deadline())
-      minuteStep: 5
+      minuteStep: 1
     }).on 'changeDate', (e) ->
       model.setEndEpoch Number(UTCToLocalDate(e.date))
 
@@ -130,7 +134,7 @@ if Meteor.isClient
       autoclose: true
       startDate: new Date(Date.now())
       initialDate: if model.beginning() then new Date(model.beginning())
-      minuteStep: 5
+      minuteStep: 1
     }).on 'changeDate', (e) ->
       model.setBeginning Number(UTCToLocalDate(e.date))
 
