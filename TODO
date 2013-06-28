@@ -4,7 +4,8 @@ A mobile app that allows a user to vote on a time-limited poll. After voting, on
 * Absolutely Critical for MVP
 
 As an admin of a show, I want to
-  * change start date
+  * Be disallowed from changing start date to be after end date
+
   * I want enter to save the title
   * be prevented from entering an empty title
   * create a poll with a specified start and end date.
@@ -12,14 +13,12 @@ As an admin of a show, I want to
   * be disallowed to create polls overlapping eachother in time
 
 As a user, I want to
-  * NOT be able to edit the poll title
   * see when a poll starts
   * automatically go to the current open poll with a uri
   * see list in order of ... end date?
 
 Bugs
   * flashing vote button
-  * Security. :)
 
 Empty?
   Write down critical improvements that are needed for the MVP broken into 1-hour fixes.
@@ -29,13 +28,16 @@ Episodes
 * list episodes in order of release date
   * watch episodes in the youtube app by tapping on them
 
+Security
+  * As a user, I want to be prevented from
+    * changing title
+    * changing poll end date
+
 Notifications
   * request to be notified when new there is a new poll
   * request to be be notified when I get new votes
   * request to be notified when a show is released for a poll I've voted on
   * Turn off notifications for the above
-
-
 
 * After MVP is up
 

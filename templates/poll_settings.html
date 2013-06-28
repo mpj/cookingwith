@@ -2,13 +2,20 @@
 
 {{#if isVisible}}
 
+<div class="poll_settings">
   <div class="row">
     <h1>Poll settings</h1>
   </div>
-  <div class="poll_settings row">
+  <div class="end row">
     <label for="date-picker">End date</label>
     <input size="16" type="text" readonly class="form_datetime">
   </div>
+  <div class="start row">
+    <label for="date-picker">Start date</label>
+    <input size="16" type="text" readonly class="form_datetime">
+  </div>
+</div>
+
 {{/if}}
 
 </template>

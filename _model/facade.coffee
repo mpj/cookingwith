@@ -8,8 +8,8 @@ CookingWith.data = {
 
 CookingWith.model =
 
-  deadline: ->
-    CookingWith.model.poll_current().end_epoch
+  deadline: -> CookingWith.model.poll_current().end_epoch
+  beginning: -> CookingWith.model.poll_current().start_epoch
 
   polls: ->
     polls.find({})
@@ -70,9 +70,10 @@ CookingWith.model =
       votes_count: 0
       poll_id: CookingWith.model.poll_current()._id
 
+  # TODO check if admin
   setEndEpoch: (epoch) ->
-    # TODO check if admin
-    # TODO use url navigation instead of session
-    id = CookingWith.model.poll_current()._id
-    polls.update id,
+    polls.update CookingWith.model.poll_current()._id,
       $set: 'end_epoch': epoch
+  setBeginning: (epoch) ->
+    polls.update CookingWith.model.poll_current()._id,
+      $set: 'start_epoch': epoch
