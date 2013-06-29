@@ -4,7 +4,8 @@ model = CookingWith.model
 
 if Meteor.isClient
 
-  Template.poll_title.visible = -> CookingWith.router.state().name is 'poll' and model.poll_current()
+  Template.poll.isVisible = ->
+    CookingWith.router.state().name is 'poll' and model.poll_current()
 
   Template.poll_title.title = ->
     model.poll_current().title
@@ -25,8 +26,10 @@ if Meteor.isClient
     if Template.poll_title.state_edit()
       $(".poll_title input[type='text']").focus()
 
-  Template.container.my_votes = model.my_votes
-  Template.container.isStatePollsList = ->
+  Template.poll.my_votes = model.my_votes
+
+
+  Template.poll_list.isVisible = ->
     CookingWith.router.state().name is 'polls'
 
   Template.poll_list.polls = ->
@@ -69,42 +72,14 @@ if Meteor.isClient
   Template.deadline.passed = ->  model.timeToEnd() <= 0
   Template.deadline.running = -> not Template.deadline.waiting() and not Template.deadline.passed()
 
-  Template.container.poll_options = model.list_options
+  Template.poll.poll_options = model.list_options
 
-  Template.poll_option.events
-    'click .vote': (e) ->
-      e.preventDefault()
-      model.vote(this)
-
-  Template.poll_option.vote_button_class = ->
-    if not model.can_vote() then 'disabled'
-    else 'btn-primary'
 
   Template.container.events
     'click .buy_votes': (e) ->
       model.request_vote_buy()
       e.preventDefault()
 
-
-  Template.poll_option_new.isStateReady = ->
-    Session.get('poll_option_new_state') is not 'adding' or not
-    Session.get('poll_option_new_state')?
-
-  Template.poll_option_new.isStateAdding = ->
-    Session.get('poll_option_new_state') is 'adding'
-
-  Template.poll_option_new.events
-    'click .new': (e) ->
-      e.preventDefault()
-      Session.set 'poll_option_new_state', 'adding'
-
-    'keydown input[type=text]': (e) ->
-      isEnter = e.keyCode is 13
-      if isEnter and e.target.value.trim().length >= 3
-        e.preventDefault()
-        model.addOption e.target.value
-        e.target.value = ''
-        Session.set 'poll_option_new_state', null
 
   Template.poll_settings.isVisible = -> true
 

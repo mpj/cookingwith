@@ -1,7 +1,11 @@
 <template name="poll_list">
 
+{{#if isVisible}}
+
 {{#each polls}}
   <div><a href="{{href}}">{{title}}</a></div>
 {{/each}}
+
+{{/if}}
 
 </template>

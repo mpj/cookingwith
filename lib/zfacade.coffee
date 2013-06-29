@@ -22,7 +22,6 @@ if Meteor.isClient
 
     list_options: ->
       if CookingWith.model.poll_current()
-        console.log("listing options")
         poll_options.find {
           'poll_id': CookingWith.model.poll_current()._id
         }, sort: votes_count: -1
@@ -71,3 +70,5 @@ if Meteor.isClient
     setBeginning: (epoch) ->
       polls.update CookingWith.model.poll_current()._id,
         $set: 'start_epoch': epoch
+
+  CookingWith.facade = CookingWith.model

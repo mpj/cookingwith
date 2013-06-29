@@ -14,23 +14,8 @@
 <template name="container">
 
 <div class="container">
-  {{> poll_title}}
-  {{#if isStatePollsList}}
-    {{> poll_list}}
-  {{else}}
-    {{> refill_time}}
-    <p>Your votes: {{my_votes}}
-      <input
-        class="buy_votes"
-        type="button" value="Buy 25 votes" /></p>
-    {{> deadline}}
-    {{#each poll_options}}
-      {{> poll_option }}
-    {{/each}}
-
-    {{> poll_option_new}}
-    {{> poll_settings}}
-  {{/if}}
+  {{> poll_list}}
+  {{> poll}}
 </div>
 
 </template>

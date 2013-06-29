@@ -2,7 +2,11 @@ A mobile app that allows a user to vote on a time-limited poll. After voting, on
 
 # Current thought patterns
 
-Just because the id has been generated, that does not mean that findOne will actually return!
+* Refactor
+  * Nest poll view
+
+* Notes
+  Just because the id has been generated, that does not mean that findOne will actually return!
 
 * Absolutely Critical for MVP
 

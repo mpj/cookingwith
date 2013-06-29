@@ -1,0 +1,19 @@
+<template name="poll">
+{{#if isVisible}}
+
+{{> poll_title}}
+{{> refill_time}}
+<p>Your votes: {{my_votes}}
+  <input
+    class="buy_votes"
+    type="button" value="Buy 25 votes" /></p>
+{{> deadline}}
+{{#each poll_options}}
+  {{> poll_option }}
+{{/each}}
+
+{{> poll_option_new}}
+{{> poll_settings}}
+
+{{/if}}
+</template>
