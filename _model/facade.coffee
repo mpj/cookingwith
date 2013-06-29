@@ -1,10 +1,5 @@
-poll_options = new Meteor.Collection 'poll_options'
-polls = new Meteor.Collection 'polls'
-
-CookingWith.data = {
-  poll_options: poll_options
-  polls: polls
-}
+polls = CookingWith.data.polls
+poll_options = CookingWith.data.poll_options
 
 CookingWith.model =
 
@@ -13,14 +8,7 @@ CookingWith.model =
 
   polls: -> polls.find {}
 
-  poll_current: ->
-    # TODO: Not keen on keeping this here...
-    navState =  Session.get 'navigation_state'
-    id = CookingWith.router.current_poll_id()
-    if not id?
-      CookingWith.router.current_poll_id polls.insert
-        title: 'Untitled poll'
-    polls.findOne id
+  poll_current: -> polls.findOne CookingWith.router.state().id
 
   my_votes: ->
     return 0 if not Meteor.user()

@@ -13,16 +13,15 @@ if Meteor.isClient
       'polls':          'polls'
       'p/:id':          'poll'
 
-    root: -> state null
+    root: ->
+      id = CookingWith.data.polls.insert
+        title: 'Untitled poll'
+      this.navigate 'p/' + id, trigger: true
 
     poll: (id) -> state name: 'poll', id: id
     polls: () -> state name: 'polls'
 
     state: state
-
-    current_poll_id: (id) ->
-      this.navigate 'p/' + id, trigger: true if id?
-      state().id if state().name is 'poll'
 
   CookingWith.router = new CookingWithRouter()
   Backbone.history.start pushState: true

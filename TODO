@@ -1,5 +1,8 @@
 A mobile app that allows a user to vote on a time-limited poll. After voting, one has to wait for a period of time before allowed to vote again. To circumvent this, the user can pay for votes using in-app purchases.
 
+# Current thought patterns
+
+Just because the id has been generated, that does not mean that findOne will actually return!
 
 * Absolutely Critical for MVP
 

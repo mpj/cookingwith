@@ -4,6 +4,8 @@ model = CookingWith.model
 
 if Meteor.isClient
 
+  Template.poll_title.visible = -> CookingWith.router.state().name is 'poll' and model.poll_current()
+
   Template.poll_title.title = ->
     model.poll_current().title
 
