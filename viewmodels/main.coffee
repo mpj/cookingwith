@@ -7,6 +7,10 @@ if Meteor.isClient
   Template.poll.isVisible = ->
     CookingWith.router.state().name is 'poll' and model.poll_current()
 
+  Template.poll.my_votes = model.my_votes
+
+  Template.poll.poll_options = model.list_options
+
   Template.poll_title.title = ->
     model.poll_current().title
 
@@ -26,7 +30,6 @@ if Meteor.isClient
     if Template.poll_title.state_edit()
       $(".poll_title input[type='text']").focus()
 
-  Template.poll.my_votes = model.my_votes
 
 
   Template.poll_list.isVisible = ->
@@ -72,7 +75,7 @@ if Meteor.isClient
   Template.deadline.passed = ->  model.timeToEnd() <= 0
   Template.deadline.running = -> not Template.deadline.waiting() and not Template.deadline.passed()
 
-  Template.poll.poll_options = model.list_options
+
 
 
   Template.container.events
