@@ -24,8 +24,6 @@ As a user, I want to
   * automatically go to the current open poll with a uri
   * see list in order of ... end date?
 
-Bugs
-  * flashing vote button
 
 Empty?
   Write down critical improvements that are needed for the MVP broken into 1-hour fixes.
