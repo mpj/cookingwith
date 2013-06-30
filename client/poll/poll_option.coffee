@@ -12,7 +12,10 @@ Template.poll_option.vote_button_class = ->
 # the button from wildly flashing. Slighly hacky, but it works
 # for now.
 Deps.autorun ->
-  Session.set '__vote_button_class',
-    if CookingWith.facade.can_vote() then 'btn-primary' else 'disabled'
+  state =  CookingWith.router.state()
+  return if state.name is not 'poll'
+  poll_id = state.id
+  can_vote = CookingWith.facade.can_vote_on poll_id, Meteor.userId()
+  Session.set '__vote_button_class', if can_vote then 'btn-primary' else 'disabled'
 
 Template.poll_option.preserve '.poll_option .votes_container .vote'
