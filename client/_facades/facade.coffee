@@ -44,7 +44,7 @@ CookingWith.model =
   timeToRefill: ->
     return 0 if not Meteor.user()?
     time = Meteor.user().profile.votes_emptied_at +
-    REFILL_TIME_MS -
+    CookingWith.config.REFILL_TIME_MS -
     CookingWith.ServerTime.instance.reactiveEpoch()
     Math.max time, 0
 

@@ -1,11 +1,13 @@
 Meteor.startup ->
+
+
   Meteor.users._ensureIndex 'profile.votes_emptied_at': 1
 
   refill_votes = ->
     selector =
       'profile.votes_emptied_at':
         $ne: null
-        $lt: (Number(new Date()) - REFILL_TIME_MS)
+        $lt: (Number(new Date()) - CookingWith.config.REFILL_TIME_MS)
 
     modifier =
       $set:
