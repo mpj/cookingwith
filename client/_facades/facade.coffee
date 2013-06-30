@@ -1,6 +1,6 @@
 
-  polls = CookingWith.data.polls
-  poll_options = CookingWith.data.poll_options
+polls = CookingWith.data.polls
+poll_options = CookingWith.data.poll_options
 
 CookingWith.model =
 
@@ -16,6 +16,7 @@ CookingWith.model =
     Meteor.user().profile.votes_count
 
   can_vote: ->
+    return false if not CookingWith.model.poll_current()?
     CookingWith.model.my_votes() > 0 &&
     CookingWith.model.poll_current().end_epoch >
       CookingWith.ServerTime.instance.reactiveEpoch()
