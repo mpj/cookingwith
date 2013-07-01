@@ -1,14 +1,18 @@
 <template name="deadline">
 
-{{#if waiting}}
+{{#if stateIs 'lacks_start'}}
+  This poll lacks a start date!
+{{/if}}}
+
+{{#if stateIs 'waiting'}}
   Poll will start in: {{clock}}
 {{/if}}
 
-{{#if passed}}
+{{#if stateIs 'passed'}}
   This poll has closed!
 {{/if}}
 
-{{#if running}}
+{{#if stateIs 'running'}}
   Poll ends in: {{clock}}
 {{/if}}
 

@@ -12,7 +12,6 @@ A mobile app that allows a user to vote on a time-limited poll. After voting, on
 
 As an admin of a show, I want to
   * Be disallowed from changing start date to be after end date
-
   * I want enter to save the title
   * be prevented from entering an empty title
   * create a poll with a specified start and end date.
@@ -20,6 +19,10 @@ As an admin of a show, I want to
   * be disallowed to create polls overlapping eachother in time
 
 As a user, I want to
+  * be deducted 10 votes for adding an option to a poll
+  * be disallowed from voting on a poll that does not have a start date
+  * be disallowed from voting on a poll that does not have a end date
+  * be informed that a poll lacks an end date
   * be prevented from voting on a poll that hasnt started
   * automatically go to the current open poll with a uri
   * see list in order of ... end date?

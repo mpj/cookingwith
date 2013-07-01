@@ -61,12 +61,12 @@ CookingWith.model =
 
   timeToEnd: ->
     poll = CookingWith.model.poll_current()
-    return 0 if not poll or not poll.end_epoch?
+    return null if not poll or not poll.end_epoch?
     poll.end_epoch - CookingWith.ServerTime.instance.reactiveEpoch()
 
   timeToStart: ->
     poll = CookingWith.model.poll_current()
-    return 0 if not poll or not poll.start_epoch?
+    return null if not poll or not poll.start_epoch?
     poll.start_epoch - CookingWith.ServerTime.instance.reactiveEpoch()
 
   addOption: (title) ->
