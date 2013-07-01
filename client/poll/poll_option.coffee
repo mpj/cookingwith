@@ -17,5 +17,3 @@ Deps.autorun ->
   poll_id = state.id
   can_vote = CookingWith.facade.can_vote_on poll_id, Meteor.userId()
   Session.set '__vote_button_class', if can_vote then 'btn-primary' else 'disabled'
-
-Template.poll_option.preserve '.poll_option .votes_container .vote'
