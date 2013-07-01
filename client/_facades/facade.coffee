@@ -15,13 +15,6 @@ CookingWith.model =
     return 0 if not Meteor.user()
     Meteor.user().profile.votes_count
 
-  # TODO deprecate
-  can_vote: ->
-    return false if not CookingWith.model.poll_current()?
-    CookingWith.model.my_votes() > 0 &&
-    CookingWith.model.poll_current().end_epoch >
-      CookingWith.ServerTime.instance.reactiveEpoch()
-
   can_vote_on: (poll_id, user_id) ->
     user = Meteor.users.findOne user_id
     return false if not user?
