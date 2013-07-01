@@ -10,9 +10,16 @@ Template.poll_title.events =
     Session.set 'poll_title_state', 'edit'
   'blur input[type=text]': ->
     Session.set 'poll_title_state', 'normal'
-  'change input[type=text]': (e) ->
-    CookingWith.data.polls.update CookingWith.router.state().id,
-      $set: title: e.target.value
+
+  'keydown input[type=text]': (e) ->
+
+    if isEsc = e.keyCode is 27
+      e.target.blur()
+
+    if isEnter = e.keyCode is 13
+      CookingWith.data.polls.update CookingWith.router.state().id,
+        $set: title: e.target.value
+      e.target.blur()
 
 Template.poll_title.rendered = ->
   if Template.poll_title.state_edit()
