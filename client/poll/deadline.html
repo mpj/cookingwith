@@ -4,6 +4,10 @@
   This poll lacks a start date!
 {{/if}}}
 
+{{#if stateIs 'lacks_end'}}
+  This poll lacks an end date!
+{{/if}}}
+
 {{#if stateIs 'waiting'}}
   Poll will start in: {{clock}}
 {{/if}}

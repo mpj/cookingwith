@@ -16,7 +16,8 @@ T.stateIs = (stateName) ->
 # a lot.
 state = -> Session.get '__deadline_state'
 calculateState = ->
-  return 'lacks_start' if not F.timeToEnd()?
+  return 'lacks_start' if not F.timeToStart()?
+  return 'lacks_end'   if not F.timeToEnd()?
   return 'waiting'     if F.timeToStart()? and F.timeToStart() > 0
   return 'passed'      if F.timeToEnd() <= 0
   return 'running'

@@ -22,7 +22,6 @@ As a user, I want to
   * be deducted 10 votes for adding an option to a poll
   * be disallowed from voting on a poll that does not have a start date
   * be disallowed from voting on a poll that does not have a end date
-  * be informed that a poll lacks an end date
   * be prevented from voting on a poll that hasnt started
   * automatically go to the current open poll with a uri
   * see list in order of ... end date?
